@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { React, useState } from "react";
+
+import { useRef } from "react";
 
 function App() {
+  const refElement = useRef();
+  console.log("refElement: ", refElement);
+  const [name, setName] = useState("Test1");
+
+  function resetValue() {
+    setName("");
+    refElement.current.focus();
+  }
+
+  function handleInput() {
+    refElement.current.style.color = "blue";
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Learning useRef</h1>
+      <input
+        ref={refElement}
+        type="text"
+        value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      ></input>
+      <button onClick={resetValue}>Reset</button>
+      <button onClick={handleInput}>Handle Input</button>
+    </>
   );
 }
 
