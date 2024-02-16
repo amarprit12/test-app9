@@ -1,14 +1,30 @@
 import "./App.css";
-import { React } from "react";
-import ChildA from "./ChildA";
+import { React, useState, useRef } from "react";
 
 function App() {
-  //prop drilling transferring data from Parent component(App.js) to
-  //Child Component (Child C)
-  const name = "Test1";
+  const refElement = useRef("");
+  console.log("refElement: ", refElement);
+  const [name, setName] = useState("test1");
+  function resetValue() {
+    setName("");
+    refElement.current.focus();
+  }
+
+  function handleInput() {
+    refElement.current.style.color = "blue";
+    refElement.current.value = "hey";
+  }
   return (
     <>
-      <ChildA name={name} />
+      <h1>Learning useRef</h1>
+      <input
+        ref={refElement}
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      ></input>
+      <button onClick={resetValue}>Reset</button>
+      <button onClick={handleInput}>Handle input</button>
     </>
   );
 }
