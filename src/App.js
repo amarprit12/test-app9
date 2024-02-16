@@ -15,6 +15,7 @@ function App() {
 
   function handleInput() {
     refElement.current.style.color = "blue";
+    refElement.current.value = "test2";
   }
 
   return (
